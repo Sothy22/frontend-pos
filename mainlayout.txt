@@ -1,0 +1,78 @@
+import { useState } from "react";
+import { useActionData } from "react-router-dom";
+
+
+function AsideBar({ isOpen, setIsOpen, isOpenDesktop, setIsOpenDesktop }) {
+    return (
+        <div>
+            {/* Mobile Phone */}
+            {isOpen && (
+                <div className="bg-blue-500 md:hidden fixed left-0 w-64 h-full z-50">
+                    <div className="flex flex-row items-center justify-between px-5 py-2 border-b border-amber-100">
+                        <h4 className="">POS System</h4>
+                        <button
+                            onClick={() => {
+                                setIsOpen(!isOpen)
+                            }}
+                            className="md:hidden text-2xl p-1 border-2 border-gray-600 rounded-md transition-all duration-300 hover:scale-100">
+                            x
+                        </button>
+                    </div>
+                </div>
+            )}
+            {/* Desktop */}
+            {isOpenDesktop && (
+                <div className="bg-blue-500 hidden md:block fixed left-0 w-64 h-full ">
+                    Desktop Screen
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default function MainLayout() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenDesktop, setIsOpenDesktop] = useState(true);
+    return (
+        <div className="bg-amber-300 min-h-screen flex flex-row">
+            {/* AsideBar */}
+            <AsideBar
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                isOpenDesktop={isOpenDesktop}
+                setIsOpenDesktop={setIsOpenDesktop}
+            />
+
+            {/* WorkSpace */}
+            <div className={`bg-white flex-1 flex flex-col ${isOpenDesktop ? "md:ml-64" : ""}`}>
+                {/* Header */}
+                <header className="bg-cyan-300 px-5 py-2 flex flex-row items-center justify-between z-40">
+
+                    {/* Desktop  */}
+                    <button
+                        onClick={() => {
+                            setIsOpenDesktop(!isOpenDesktop)
+                        }}
+                        className="hidden md:inline-flex text-2xl p-1 border-2 border-gray-600 rounded-md transition-all duration-300 hover:scale-100">
+                        ☰
+                    </button>
+
+                    {/* Mobile Phone  */}
+                    <button
+                        onClick={() => {
+                            setIsOpen(!isOpen)
+                        }}
+                        className="md:hidden text-2xl p-1 border-2 border-gray-600 rounded-md transition-all duration-300 hover:scale-100">
+                        ☰
+                    </button>
+                    <h1>Dashboard</h1>
+                </header>
+
+                {/* Containner  */}
+                <main className="flex-1">
+                    <h1>nvaivha</h1>
+                </main>
+            </div>
+        </div>
+    );
+}

@@ -1,0 +1,40 @@
+import { useEffect, useState } from "react";
+import ProductCard from "../../components/cards/ProductCard";
+import { NavLink, useNavigate } from "react-router-dom";
+
+export default function ProductPage() {
+  const [data, setData] = useState([]);
+  // How to fetch api
+  useEffect(() => {
+    const fetchingData = async () => {
+      const api = await fetch("https://dummyjson.com/products");
+      const res = await api.json();
+      console.log("API: ", res?.products);
+      setData(res?.products);
+    };
+    fetchingData();
+  }, []);
+
+  const navigate = useNavigate(); 
+
+  function btnAddToCard(item) {
+    alert(item?.title);
+    console.log("Item add to card: ", item);
+    navigate(`/product/${item?.id}`);
+  }
+
+  return (
+    <div className="mt-20 ">
+      <h1>Product Page</h1>
+      <NavLink to="/">Back home Page</NavLink>
+      <div className="flex flex-row gap-5 flex-wrap justify-center">
+        {data.map((item, index) => (
+          <ProductCard
+            key={index}
+            data={{ ...item, btnAddToCard: () => btnAddToCard(item) }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
