@@ -14,7 +14,7 @@ export const request = async (url = '', method = 'get', data = {}) => {
     url: configs.base_url + url,
     method: method,
     data: data,
-    ...headers,
+    headers,
   })
     .then((res) => {
       console.log('res :', res);
@@ -33,5 +33,9 @@ export const request = async (url = '', method = 'get', data = {}) => {
         }
         return errorResponse.data;
       }
+
+      throw new Error(
+        'Unable to reach the backend API. Check the API URL and backend deployment.',
+      );
     });
 };

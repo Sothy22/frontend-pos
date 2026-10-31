@@ -58,7 +58,7 @@ export default function LoginPage() {
       setMessage(loginData?.message || 'Login failed. Please try again.');
     } catch (error) {
       console.error(error);
-      setMessage('Unable to login. Please try again.');
+      setMessage(error?.message || 'Unable to login. Please try again.');
     }
   };
 
