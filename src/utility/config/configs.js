@@ -1,6 +1,8 @@
 const ensureSlash = (value) => value.replace(/\/+$/, '') + '/';
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
+const apiUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://backen-pos-3.onrender.com//api/';
 const storageUrl =
   import.meta.env.VITE_STORAGE_BASE_URL ||
   `${apiUrl.replace(/\/api\/?$/, '')}/storage/`;
