@@ -7,7 +7,7 @@ export const request = async (url = '', method = 'get', data = {}) => {
   };
 
   if (data instanceof FormData) {
-    headers['Content-Type'] = 'multipart/form-data';
+    delete headers['Content-Type'];
   }
 
   return await axios({
