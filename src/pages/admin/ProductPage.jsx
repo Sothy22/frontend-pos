@@ -76,6 +76,19 @@ export default function ProductPage() {
   const [query, setQuery] = useState('');
   const [isEdit, setIsEdit] = useState(false);
 
+  const getProductImageUrl = (product) => {
+    if (typeof product?.image_url === 'string' && product.image_url) {
+      return product.image_url;
+    }
+    if (typeof product?.image === 'string' && product.image) {
+      if (/^https?:\/\//i.test(product.image)) {
+        return product.image;
+      }
+      return configs.image_url + product.image.replace(/^\/+/, '');
+    }
+    return null;
+  };
+
   const fetchingData = async () => {
     setLoading(true);
     const resBrand = await getBrand();
@@ -339,7 +352,7 @@ export default function ProductPage() {
                 />
               </div>
               {/* Preview? */}
-              {form?.image && (
+              {form?.image instanceof File && (
                 <div className="w-20 h-20">
                   <img
                     className="w-full h-full rounded-md bg-gray-300"
@@ -428,11 +441,14 @@ export default function ProductPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex size-14 items-center justify-center overflow-hidden rounded-md border border-border bg-muted/50">
-                        {item?.image ? (
+                        {getProductImageUrl(item) ? (
                           <img
                             className="size-full object-cover"
-                            src={configs.image_url + item?.image}
+                            src={getProductImageUrl(item)}
                             alt={item?.name ?? 'Product'}
+                            onError={(event) => {
+                              event.currentTarget.style.display = 'none';
+                            }}
                           />
                         ) : (
                           <div className="flex flex-col items-center gap-1 text-muted-foreground">
@@ -453,7 +469,7 @@ export default function ProductPage() {
                             console.log('Item edit: ', item);
 
                             // Set into form
-                            setForm(item);
+                          setForm({ ...item, image: null });
                             setIsEdit(true);
                             // Open dialog form
                             setIsOpen(true);
