@@ -9,12 +9,23 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
+import { getProductImageUrl } from '@/utility/config/configs';
 
 export default function Poscard({ data }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       <Card className="w-87.5">
-        <img className="w-full h-87.5" src={data?.imageurl} alt={data?.name} />
+        {getProductImageUrl(data) ? (
+          <img
+            className="h-87.5 w-full object-cover"
+            src={getProductImageUrl(data)}
+            alt={data?.name}
+          />
+        ) : (
+          <div className="flex h-87.5 w-full items-center justify-center bg-gray-100 text-sm text-gray-500">
+            No image
+          </div>
+        )}
         <CardHeader>
           <CardTitle className={'flex gap-1'}>
             <div className="">{data?.name}</div>|
