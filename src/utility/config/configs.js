@@ -5,7 +5,7 @@ const normalizeUrl = (value) => {
 };
 
 const apiUrl = normalizeUrl(
-  import.meta.env.VITE_API_BASE_URL || 'https://backen-pos-1.onrender.com/api/',
+  import.meta.env.VITE_API_BASE_URL || 'https://backen-pos-2.onrender.com/api/',
 );
 const storageUrl =
   import.meta.env.VITE_STORAGE_BASE_URL ||
