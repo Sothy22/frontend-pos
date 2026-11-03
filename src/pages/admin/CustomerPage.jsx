@@ -135,6 +135,7 @@ export default function CustomerPage() {
             <TableHead>Phone</TableHead>
             <TableHead>Address</TableHead>
             <TableHead>Created</TableHead>
+            <TableHead>Action</TableHead>
             <TableHead />
           </TableRow>
         </TableHeader>

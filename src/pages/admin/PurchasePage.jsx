@@ -280,6 +280,7 @@ export default function PurchasePage() {
             <TableHead>Paid</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Created</TableHead>
+            <TableHead>Action</TableHead>
             <TableHead />
           </TableRow>
         </TableHeader>
