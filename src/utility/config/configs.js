@@ -4,11 +4,9 @@ const normalizeUrl = (value) => {
   return ensureTrailingSlash(withoutDuplicatePathSlashes);
 };
 
-const apiUrl =
-  normalizeUrl(
-    import.meta.env.VITE_API_BASE_URL ||
-      'https://backen-pos-6.onrender.com/api/',
-  );
+const apiUrl = normalizeUrl(
+  import.meta.env.VITE_API_BASE_URL || 'https://backen-pos-1.onrender.com/api/',
+);
 const storageUrl =
   import.meta.env.VITE_STORAGE_BASE_URL ||
   `${apiUrl.replace(/\/api\/?$/, '')}/storage/`;

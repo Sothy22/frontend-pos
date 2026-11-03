@@ -126,12 +126,10 @@ export default function RegisterPage() {
               className="h-9 rounded-md border border-input bg-transparent px-3 text-sm"
               required
             >
-              <option value="user">User</option>
-              <option value="teacher">Teacher</option>
               <option value="admin">Admin</option>
             </select>
             {validate?.role && (
-              <p className="text-red-500">{validate.role[0]}</p>
+              <p claselectssName="text-red-500">{validate.role[0]}</p>
             )}
           </div>
           <div className="grid gap-2">
