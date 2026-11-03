@@ -19,6 +19,8 @@ import {
   StoreIcon,
   User,
   Users,
+  ShoppingCart,
+  UserRound,
 } from 'lucide-react';
 
 import {
@@ -95,6 +97,16 @@ const data = {
       title: 'Supplier',
       url: '/supplier',
       icon: Users,
+    },
+    {
+      title: 'Customer',
+      url: '/customer',
+      icon: UserRound,
+    },
+    {
+      title: 'Purchase',
+      url: '/purchase',
+      icon: ShoppingCart,
     },
     // {
     //   title: 'User',

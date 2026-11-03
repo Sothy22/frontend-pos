@@ -10,6 +10,8 @@ import CategoryPage from './pages/admin/CategoryPage';
 import PosPage from './pages/admin/PosPage';
 import BrandPage from './pages/admin/BrandPage';
 import SupplierPage from './pages/admin/SupplierPage';
+import CustomerPage from './pages/admin/CustomerPage';
+import PurchasePage from './pages/admin/PurchasePage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import AuthLayout from './components/layout/AuthLoyout';
@@ -45,6 +47,8 @@ const App = () => {
             <Route path="brand" element={<BrandPage />} />
             <Route path="pos" element={<PosPage />} />
             <Route path="supplier" element={<SupplierPage />} />
+            <Route path="customer" element={<CustomerPage />} />
+            <Route path="purchase" element={<PurchasePage />} />
             <Route path="product/:id" element={<ProductDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
