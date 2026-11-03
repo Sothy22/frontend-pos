@@ -19,11 +19,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Plus, Trash } from 'lucide-react';
-import {
-  getPurchases,
-  createPurchase,
-  deletePurchase,
-} from '@/func/purchase';
+import { getPurchases, createPurchase, deletePurchase } from '@/func/purchase';
 import { getData as getProducts } from '@/func/product';
 import { getData as getSuppliers } from '@/func/supplier';
 import { formartDate } from '@/utility/helper/formartDate';
@@ -56,9 +52,6 @@ export default function PurchasePage() {
       const [purchaseResponse, productResponse, supplierResponse] =
         await Promise.all([getPurchases(), getProducts(), getSuppliers()]);
       if (purchaseResponse?.message?.includes('route api/purchase')) {
-        setError(
-          'Purchase API is not available on the deployed backend. Deploy the latest backend code and run migrations.',
-        );
         setData([]);
       } else {
         setError('');

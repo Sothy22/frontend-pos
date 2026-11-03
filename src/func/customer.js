@@ -11,7 +11,7 @@ const createData = async (data) => {
 };
 
 const updateData = async (id, data) => {
-  const res = await request(`customer/${id}`, 'post', data);
+  const res = await request(`customer/${id}`, 'put', data);
   return res;
 };
 

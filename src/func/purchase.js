@@ -11,7 +11,7 @@ const createData = async (data) => {
 };
 
 const updateData = async (id, data) => {
-  const res = await request(`purchase/${id}`, 'post', data);
+  const res = await request(`purchase/${id}`, 'put', data);
   return res;
 };
 
@@ -21,8 +21,3 @@ const deleteData = async (id) => {
 };
 
 export { getData, createData, updateData, deleteData };
-
-export const getPurchases = getData;
-export const createPurchase = createData;
-export const updatePurchase = updateData;
-export const deletePurchase = deleteData;

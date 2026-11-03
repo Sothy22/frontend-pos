@@ -46,14 +46,18 @@ export default function CustomerPage() {
       email: form.email || null,
       tel: form.tel || null,
     };
-    if (form.id) {
-      await updateData(form.id, payload);
-    } else {
-      await createData(payload);
+    const response = form.id
+      ? await updateData(form.id, payload)
+      : await createData(payload);
+
+    if (response?.errors || response?.message?.toLowerCase().includes('could not be found')) {
+      alert(response?.message || 'Unable to update customer');
+      return;
     }
+
     setOpen(false);
     setForm(emptyForm);
-    fetchData();
+    await fetchData();
   };
 
   const remove = async (id) => {
