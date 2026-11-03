@@ -21,3 +21,8 @@ const deleteData = async (id) => {
 };
 
 export { getData, createData, updateData, deleteData };
+
+export const getPurchases = getData;
+export const createPurchase = createData;
+export const updatePurchase = updateData;
+export const deletePurchase = deleteData;

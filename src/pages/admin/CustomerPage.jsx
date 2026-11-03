@@ -136,7 +136,6 @@ export default function CustomerPage() {
             <TableHead>Address</TableHead>
             <TableHead>Created</TableHead>
             <TableHead>Action</TableHead>
-            <TableHead />
           </TableRow>
         </TableHeader>
         <TableBody>

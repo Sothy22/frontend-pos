@@ -19,7 +19,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Plus, Trash } from 'lucide-react';
-import { getData, createData, deleteData } from '@/func/purchase';
+import {
+  getPurchases,
+  createPurchase,
+  deletePurchase,
+} from '@/func/purchase';
 import { getData as getProducts } from '@/func/product';
 import { getData as getSuppliers } from '@/func/supplier';
 import { formartDate } from '@/utility/helper/formartDate';
@@ -50,7 +54,7 @@ export default function PurchasePage() {
   const fetchData = async () => {
     try {
       const [purchaseResponse, productResponse, supplierResponse] =
-        await Promise.all([getData(), getProducts(), getSuppliers()]);
+        await Promise.all([getPurchases(), getProducts(), getSuppliers()]);
       if (purchaseResponse?.message?.includes('route api/purchase')) {
         setError(
           'Purchase API is not available on the deployed backend. Deploy the latest backend code and run migrations.',
@@ -82,7 +86,7 @@ export default function PurchasePage() {
 
   const submit = async (event) => {
     event.preventDefault();
-    await createData({
+    await createPurchase({
       ...form,
       shipping_cost: Number(form.shipping_cost),
       paid: Number(form.paid),
@@ -281,7 +285,6 @@ export default function PurchasePage() {
             <TableHead>Status</TableHead>
             <TableHead>Created</TableHead>
             <TableHead>Action</TableHead>
-            <TableHead />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -297,7 +300,7 @@ export default function PurchasePage() {
                   size="icon"
                   variant="destructive"
                   onClick={async () => {
-                    await deleteData(item._id || item.id);
+                    await deletePurchase(item._id || item.id);
                     fetchData();
                   }}
                 >
