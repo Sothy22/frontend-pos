@@ -98,6 +98,7 @@ const data = {
       url: '/supplier',
       icon: Users,
     },
+
     {
       title: 'Customer',
       url: '/customer',

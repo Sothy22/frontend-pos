@@ -35,6 +35,7 @@ const emptyDetail = {
 
 export default function PurchasePage() {
   const [data, setData] = useState([]);
+  const [error, setError] = useState('');
   const [products, setProducts] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [open, setOpen] = useState(false);
@@ -47,11 +48,23 @@ export default function PurchasePage() {
   });
 
   const fetchData = async () => {
-    const [purchaseResponse, productResponse, supplierResponse] =
-      await Promise.all([getPurchases(), getProducts(), getSuppliers()]);
-    setData(purchaseResponse?.data || []);
-    setProducts(productResponse?.data || []);
-    setSuppliers(supplierResponse?.data || []);
+    try {
+      const [purchaseResponse, productResponse, supplierResponse] =
+        await Promise.all([getPurchases(), getProducts(), getSuppliers()]);
+      if (purchaseResponse?.message?.includes('route api/purchase')) {
+        setError(
+          'Purchase API is not available on the deployed backend. Deploy the latest backend code and run migrations.',
+        );
+        setData([]);
+      } else {
+        setError('');
+        setData(purchaseResponse?.data || []);
+      }
+      setProducts(productResponse?.data || []);
+      setSuppliers(supplierResponse?.data || []);
+    } catch (fetchError) {
+      setError(fetchError?.message || 'Unable to load purchase data.');
+    }
   };
 
   useEffect(() => {
@@ -87,6 +100,11 @@ export default function PurchasePage() {
 
   return (
     <div className="space-y-4">
+      {error && (
+        <div className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <h1>Purchase</h1>
         <Dialog open={open} onOpenChange={setOpen}>
