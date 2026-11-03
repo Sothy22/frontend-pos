@@ -1,7 +1,23 @@
 import { request } from '@/utility/helper/request';
 
-export const getCustomers = () => request('customer', 'get');
-export const createCustomer = (data) => request('customer', 'post', data);
-export const updateCustomer = (id, data) =>
-  request(`customer/${id}`, 'put', data);
-export const deleteCustomer = (id) => request(`customer/${id}`, 'delete');
+const getData = async () => {
+  const res = await request('customer', 'get');
+  return res;
+};
+
+const createData = async (data) => {
+  const res = await request('customer', 'post', data);
+  return res;
+};
+
+const updateData = async (id, data) => {
+  const res = await request(`customer/${id}`, 'post', data);
+  return res;
+};
+
+const deleteData = async (id) => {
+  const res = await request(`customer/${id}`, 'delete');
+  return res;
+};
+
+export { getData, createData, updateData, deleteData };

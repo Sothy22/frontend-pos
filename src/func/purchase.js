@@ -1,6 +1,23 @@
 import { request } from '@/utility/helper/request';
 
-export const getPurchases = () => request('purchase', 'get');
-export const getPurchase = (id) => request(`purchase/${id}`, 'get');
-export const createPurchase = (data) => request('purchase', 'post', data);
-export const deletePurchase = (id) => request(`purchase/${id}`, 'delete');
+const getData = async () => {
+  const res = await request('purchase', 'get');
+  return res;
+};
+
+const createData = async (data) => {
+  const res = await request('purchase', 'post', data);
+  return res;
+};
+
+const updateData = async (id, data) => {
+  const res = await request(`purchase/${id}`, 'post', data);
+  return res;
+};
+
+const deleteData = async (id) => {
+  const res = await request(`purchase/${id}`, 'delete');
+  return res;
+};
+
+export { getData, createData, updateData, deleteData };
